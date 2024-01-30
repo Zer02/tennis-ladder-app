@@ -2,10 +2,24 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import PlayerProfileView from "../views/PlayerProfileView.vue";
+import SimulationView from '../views/Simulation.vue';
 
 const routes = [
-  { path: "/", component: HomeView },
-  { path: "/player/:id", component: PlayerProfileView, props: true },
+  { 
+    path: "/", 
+    name: HomeView,
+    component: HomeView 
+  },
+  { 
+    path: "/player/:id", 
+    component: PlayerProfileView, 
+    props: true 
+  },
+  {
+    path: '/simulation',
+    name: 'Simulation',
+    component: SimulationView,
+  },
 ];
 
 const router = createRouter({

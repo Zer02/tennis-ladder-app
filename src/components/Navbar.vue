@@ -2,6 +2,7 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link>
+    <router-link to="/simulation">Simulation</router-link>
   </nav>
 </template>
 

@@ -1,7 +1,8 @@
 <!-- src/views/HomeView.vue -->
 <template>
   <div>
-    <!-- <Navbar /> -->
+    <Navbar />
+    <button @click="simulateWeek">Simulate Week</button>
     <h1 class="title">Tennis Ranked Ladder</h1>
     <div class="centered-table">
       <table>
@@ -11,8 +12,8 @@
             <th>Name</th>
             <th>ELO</th>
             <th>Matches Played</th>
-            <th>Wins</th>
-            <th>Losses</th>
+            <!-- <th>Wins</th>
+            <th>Losses</th> -->
             <th>Win Percentage</th>
           </tr>
         </thead>
@@ -24,8 +25,8 @@
             </td>
             <td>{{ player.rating }}</td>
             <td>{{ player.matchesPlayed }}</td>
-            <td>{{ player.wins }}</td>
-            <td>{{ player.losses }}</td>
+            <!-- <td>{{ player.wins }}</td>
+            <td>{{ player.losses }}</td> -->
             <td>{{ calculateWinPercentage(player.wins, player.losses) }}%</td>
           </tr>
         </tbody>
@@ -36,6 +37,7 @@
 
 <script>
 import Navbar from '../components/Navbar.vue';
+import { simulateSeason } from '@/utils/simulation'; 
 
 export default {
   components: {
@@ -61,9 +63,33 @@ export default {
     };
   },
   methods: {
-    calculateWinPercentage(wins, losses) {
-      const totalMatches = wins + losses;
-      return totalMatches > 0 ? ((wins / totalMatches) * 100).toFixed(2) : 0;
+    calculateWinPercentage(wins, matchesPlayed) {
+      return matchesPlayed === 0 ? 0 : ((wins / matchesPlayed) * 100).toFixed(2);
+    },
+    simulateWeek() {
+      // Simulate a week of matches
+      const results = simulateSeason(this.players, 5, 32); // 5 matches per week, adjust kFactor as needed
+
+      // Update HomeView data based on the simulation results
+      this.players.forEach((player, index) => {
+        player.rating = results[index].rating;
+        player.matchesPlayed = results[index].matchesPlayed;
+        player.wins = results[index].wins;
+        // You may update other player statistics here if needed
+      });
+
+      // Update ranks based on ELO ratings
+      this.updateRanks();
+    },
+    updateRanks() {
+      // Sort players based on ELO ratings
+      const sortedPlayers = this.players.slice().sort((a, b) => b.rating - a.rating);
+
+      // Assign ranks based on the sorted order
+      sortedPlayers.forEach((player, index) => {
+        const originalIndex = this.players.findIndex((p) => p.id === player.id);
+        this.$set(this.players, originalIndex, { ...this.players[originalIndex], rank: index + 1 });
+      });
     },
   },
 };

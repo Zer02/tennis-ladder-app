@@ -37,7 +37,14 @@ export default {
       const players = [
         { id: 1, name: 'SwiftTiger', rating: 1500, matchesPlayed: 50, wins: 25, losses: 25 },
         { id: 2, name: 'CleverLion', rating: 1480, matchesPlayed: 45, wins: 22, losses: 23 },
-        // Add more players with accurate data...
+        { id: 3, name: 'MightyEagle', rating: 1450, matchesPlayed: 40, wins: 20, losses: 20 },
+        { id: 4, name: 'RadiantDragon', rating: 1420, matchesPlayed: 55, wins: 28, losses: 27 },
+        { id: 5, name: 'GoldenPhoenix', rating: 1380, matchesPlayed: 60, wins: 30, losses: 30 },
+        { id: 6, name: 'SwiftLion', rating: 1360, matchesPlayed: 48, wins: 24, losses: 24 },
+        { id: 7, name: 'CleverEagle', rating: 1340, matchesPlayed: 42, wins: 21, losses: 21 },
+        { id: 8, name: 'MightyPhoenix', rating: 1320, matchesPlayed: 38, wins: 19, losses: 19 },
+        { id: 9, name: 'RadiantTiger', rating: 1300, matchesPlayed: 58, wins: 29, losses: 29 },
+        { id: 10, name: 'GoldenDragon', rating: 1280, matchesPlayed: 65, wins: 32, losses: 33 },
       ];
 
       return players.find(player => player.id === parseInt(playerId));
