@@ -16,6 +16,7 @@
 
 <script>
 import Navbar from '../components/Navbar.vue';
+import { calculateWinPercentage } from '@/utils/calculateWinPercentage';
 
 export default {
   components: {
@@ -32,6 +33,7 @@ export default {
     this.player = this.getPlayerById(playerId);
   },
   methods: {
+    calculateWinPercentage,
     getPlayerById(playerId) {
       // Replace this with your actual player data fetching logic
       const players = [

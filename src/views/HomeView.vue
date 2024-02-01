@@ -37,6 +37,7 @@
 
 <script>
 import Navbar from '../components/Navbar.vue';
+import { calculateWinPercentage } from '@/utils/calculateWinPercentage';
 import { simulateSeason } from '@/utils/simulation'; 
 
 export default {
@@ -54,7 +55,7 @@ export default {
       { id: 7, name: 'CleverEagle', rating: 1340, matchesPlayed: 42, wins: 21, losses: 21 },
       { id: 8, name: 'MightyPhoenix', rating: 1320, matchesPlayed: 38, wins: 19, losses: 19 },
       { id: 9, name: 'RadiantTiger', rating: 1300, matchesPlayed: 58, wins: 29, losses: 29 },
-      { id: 10, name: 'GoldenDragon', rating: 1280, matchesPlayed: 65, wins: 32, losses: 33 },
+      { id: 10, name: 'GoldenDragon', rating: 1280, matchesPlayed: 65, wins: 32, losses: 33 }
       // Add more players with accurate data...
     ];
 
@@ -63,9 +64,7 @@ export default {
     };
   },
   methods: {
-    calculateWinPercentage(wins, matchesPlayed) {
-      return matchesPlayed === 0 ? 0 : ((wins / matchesPlayed) * 100).toFixed(2);
-    },
+    calculateWinPercentage,
     simulateWeek() {
       // Simulate a week of matches
       const results = simulateSeason(this.players, 5, 32); // 5 matches per week, adjust kFactor as needed
@@ -73,22 +72,24 @@ export default {
       // Update HomeView data based on the simulation results
       this.players.forEach((player, index) => {
         player.rating = results[index].rating;
-        player.matchesPlayed = results[index].matchesPlayed;
-        player.wins = results[index].wins;
-        // You may update other player statistics here if needed
+        player.matchesPlayed += results[index].matchesPlayed;
+        player.wins += results[index].wins;
       });
 
-      // Update ranks based on ELO ratings
+      // Update ranks based on sorted ELO ratings
       this.updateRanks();
     },
     updateRanks() {
       // Sort players based on ELO ratings
       const sortedPlayers = this.players.slice().sort((a, b) => b.rating - a.rating);
 
-      // Assign ranks based on the sorted order
-      sortedPlayers.forEach((player, index) => {
-        const originalIndex = this.players.findIndex((p) => p.id === player.id);
-        this.$set(this.players, originalIndex, { ...this.players[originalIndex], rank: index + 1 });
+      // Update ranks based on the sorted order
+      sortedPlayers.forEach((sortedPlayer, index) => {
+        const originalIndex = this.players.findIndex((player) => player.name === sortedPlayer.name);
+        this.$set(this.players, originalIndex, {
+          ...this.players[originalIndex],
+          rank: index + 1,
+        });
       });
     },
   },
