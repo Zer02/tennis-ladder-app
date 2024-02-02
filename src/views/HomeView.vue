@@ -1,7 +1,7 @@
 <!-- src/views/HomeView.vue -->
 <template>
   <div>
-    <Navbar />
+    <!-- <Navbar /> -->
     <button @click="simulateWeek">Simulate Week</button>
     <h1 class="title">Tennis Ranked Ladder</h1>
     <div class="centered-table">
