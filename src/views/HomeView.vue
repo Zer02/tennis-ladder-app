@@ -12,8 +12,8 @@
             <th>Name</th>
             <th>ELO</th>
             <th>Matches Played</th>
-            <!-- <th>Wins</th>
-            <th>Losses</th> -->
+            <th>Wins</th>
+            <th>Losses</th>
             <th>Win Percentage</th>
           </tr>
         </thead>
@@ -25,8 +25,8 @@
             </td>
             <td>{{ player.rating }}</td>
             <td>{{ player.matchesPlayed }}</td>
-            <!-- <td>{{ player.wins }}</td>
-            <td>{{ player.losses }}</td> -->
+            <td>{{ player.wins }}</td>
+            <td>{{ player.losses }}</td>
             <td>{{ calculateWinPercentage(player.wins, player.losses) }}%</td>
           </tr>
         </tbody>
@@ -67,29 +67,28 @@ export default {
     calculateWinPercentage,
     simulateWeek() {
       // Simulate a week of matches
-      const results = simulateSeason(this.players, 5, 32); // 5 matches per week, adjust kFactor as needed
+      const results = simulateSeason(this.players, 1, 32);
 
       // Update HomeView data based on the simulation results
       this.players.forEach((player, index) => {
-        player.rating = results[index].rating;
-        player.matchesPlayed += results[index].matchesPlayed;
-        player.wins += results[index].wins;
+        this.$set(player, 'rating', results[index].rating);
+        this.$set(player, 'matchesPlayed', player.matchesPlayed + results[index].matchesPlayed);
+        this.$set(player, 'wins', player.wins + results[index].wins);
       });
+
+      // Force a rerender by assigning a new array reference
+      this.players = [...this.players];
 
       // Update ranks based on sorted ELO ratings
       this.updateRanks();
     },
     updateRanks() {
       // Sort players based on ELO ratings
-      const sortedPlayers = this.players.slice().sort((a, b) => b.rating - a.rating);
+      this.players.sort((a, b) => b.rating - a.rating);
 
       // Update ranks based on the sorted order
-      sortedPlayers.forEach((sortedPlayer, index) => {
-        const originalIndex = this.players.findIndex((player) => player.name === sortedPlayer.name);
-        this.$set(this.players, originalIndex, {
-          ...this.players[originalIndex],
-          rank: index + 1,
-        });
+      this.players.forEach((player, index) => {
+        this.$set(player, 'rank', index + 1);
       });
     },
   },
