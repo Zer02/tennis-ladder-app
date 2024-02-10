@@ -76,12 +76,15 @@ export default {
         this.$set(player, 'wins', player.wins + results[index].wins);
       });
 
-      // Force a rerender by assigning a new array reference
-      this.players = [...this.players];
+      // Sort players based on ELO ratings after updating
+      this.players.sort((a, b) => b.rating - a.rating);
 
-      // Update ranks based on sorted ELO ratings
-      this.updateRanks();
+      // Update ranks based on the sorted order
+      this.players.forEach((player, index) => {
+        this.$set(player, 'rank', index + 1);
+      });
     },
+
     updateRanks() {
       // Sort players based on ELO ratings
       this.players.sort((a, b) => b.rating - a.rating);

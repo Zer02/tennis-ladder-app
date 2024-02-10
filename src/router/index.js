@@ -4,6 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import AboutView from '@/views/AboutView.vue';
 import PlayerProfileView from "../views/PlayerProfileView.vue";
 import SimulationView from '../views/Simulation.vue';
+import MapView from '../components/Map.vue';
 
 const routes = [
   { 
@@ -25,6 +26,11 @@ const routes = [
     path: '/simulation',
     name: 'Simulation',
     component: SimulationView,
+  },
+  {
+    path: '/map',
+    name: 'Map',
+    component: MapView,
   },
 ];
 
