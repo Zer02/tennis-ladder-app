@@ -1,7 +1,7 @@
 <!-- src/views/PlayerProfileView.vue -->
 <template>
   <div>
-    <Navbar />
+    <!-- <Navbar /> -->
     <h1 class="title">Player Profile</h1>
     <div>
       <h2>{{ player.name }}</h2>

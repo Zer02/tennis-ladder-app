@@ -9,12 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "leaflet": "^1.9.4",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
+    "@vue-leaflet/vue-leaflet": "^0.10.1",
+    "leaflet": "^1.9.4",
     "vite": "^5.0.10"
   }
 }

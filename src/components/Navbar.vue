@@ -3,6 +3,8 @@
   <nav>
     <router-link to="/">Home</router-link>
     <router-link to="/simulation">Simulation</router-link>
+    <router-link to="/secondaryMap">Full Map</router-link>
+
   </nav>
 </template>
 

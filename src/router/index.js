@@ -1,36 +1,36 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import AboutView from '@/views/AboutView.vue';
 import PlayerProfileView from "../views/PlayerProfileView.vue";
 import SimulationView from '../views/Simulation.vue';
-import MapView from '../components/Map.vue';
+import Map from '../components/Map.vue';
+import SecondaryMap from "@/views/SecondaryMap.vue";
 
 const routes = [
-  { 
-    path: "/", 
+  {
+    path: "/",
     name: HomeView,
-    component: HomeView 
-  },
-  { 
-    path: "/about", 
-    name: AboutView,
-    component: AboutView 
-  },
-  { 
-    path: "/player/:id", 
-    component: PlayerProfileView, 
-    props: true 
+    component: HomeView,
   },
   {
-    path: '/simulation',
-    name: 'Simulation',
+    path: "/player/:id",
+    component: PlayerProfileView,
+    props: true,
+  },
+  {
+    path: "/simulation",
+    name: "Simulation",
     component: SimulationView,
   },
   {
-    path: '/map',
-    name: 'Map',
-    component: MapView,
+    path: "/map",
+    name: "Map",
+    component: Map,
+  },
+  {
+    path: "/secondaryMap",
+    name: "SecondaryMap",
+    component: SecondaryMap,
   },
 ];
 

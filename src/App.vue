@@ -4,13 +4,14 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="" class="logo" src="@/assets/marker-icon.png" width="125" height="125" />
 
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <!-- <RouterLink to="/about">About</RouterLink> -->
         <RouterLink to="/map">Map</RouterLink>
+        <router-link to="/secondaryMap">Full Map</router-link>
         <!-- <RouterLink to="/simulation">Simulation</RouterLink> -->
       </nav>
     </div>
@@ -19,7 +20,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped>
+<style>
 header {
   line-height: 1.5;
   max-height: 100vh;
